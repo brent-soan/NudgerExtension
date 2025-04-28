@@ -1,6 +1,5 @@
 import C from "./constants.js";
 
-// Purpose reminder
 setInterval(async () => {
     await chrome.notifications.create({
         type: "image",
@@ -11,18 +10,35 @@ setInterval(async () => {
     });
 }, C.PR_INTERVAL);
 
-// Status check
 setInterval(async () => {
-    await chrome.notifications.create({
+    await chrome.notifications.create(C.SC_NOTIF_ID, 
+    {
         type: "basic",
         title: "Nudger - Status Check",
         message: "Are you wasting your time?",
         iconUrl: "/images/icon-128.png",
         buttons: [{
-            title: "✅ Yes"
+            title: "☹️ Yes"
         }, {
-            title: "❌ No"
+            title: "🙅 No"
         }]
     });
-}, C.TEST_INTERVAL);
+}, C.SC_INTERVAL);
 
+// Events
+chrome.notifications.onButtonClicked.addListener(async (notifId, btnIdx) => {
+    if(btnIdx === 0) {
+        console.log("Y");
+        chrome.notifications.create({
+            type: "image",
+            title: "Nudger - Purpose Reminder",
+            message: "",
+            iconUrl: "/images/icon-128.png",
+            imageUrl: "/images/SC.jpg"
+        });
+    } else if(btnIdx === 1) {
+        console.log("N");
+    }
+    
+    chrome.notifications.clear(C.SC_NOTIF_ID); 
+});
