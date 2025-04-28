@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "Purpose Reminder",
+    "version": "1.0",
+    "permissions": [ "notifications", "alarms" ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "like-emoji-smiley-face-thumbs-up.png"
+    }
+}
