@@ -9,10 +9,10 @@ chrome.alarms.create("SC", {
 });
 
 // Events
-chrome.alarms.onAlarm.addListener(async (alarm) => {
+chrome.alarms.onAlarm.addListener((alarm) => {
     console.log(alarm);
     if(alarm.name === "PR") {
-        await chrome.notifications.create({
+        chrome.notifications.create({
             type: "image",
             title: "Nudger - Purpose Reminder",
             message: "",
@@ -20,7 +20,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
             imageUrl: "/images/PR.jpg"
         });
     } else if(alarm.name === "SC") {
-        await chrome.notifications.create("SC", 
+        chrome.notifications.create("SC", 
         {
             type: "basic",
             title: "Nudger - Status Check",
@@ -35,7 +35,7 @@ chrome.alarms.onAlarm.addListener(async (alarm) => {
         });
     }
 });
-chrome.notifications.onButtonClicked.addListener(async (notifId, btnIdx) => {
+chrome.notifications.onButtonClicked.addListener((notifId, btnIdx) => {
     if(notifId === "SC") { 
         if(btnIdx === 0) {
             console.log("Y");
