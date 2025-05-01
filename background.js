@@ -3,12 +3,14 @@ chrome.alarms.create("PR", {
     delayInMinutes: 60,
     periodInMinutes: 60
 });
+
 chrome.alarms.create("SC", {
     delayInMinutes: 15,
     periodInMinutes: 15
 });
 
 // Events
+// Create notification when an alarm triggers
 chrome.alarms.onAlarm.addListener((alarm) => {
     console.log(alarm);
     if(alarm.name === "PR") {
@@ -35,6 +37,8 @@ chrome.alarms.onAlarm.addListener((alarm) => {
         });
     }
 });
+
+// Triggered when the user clicks on a notification button
 chrome.notifications.onButtonClicked.addListener((notifId, btnIdx) => {
     if(notifId === "SC") { 
         if(btnIdx === 0) {
