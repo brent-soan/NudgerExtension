@@ -18,8 +18,8 @@ chrome.alarms.onAlarm.addListener((alarm) => {
             type: "image",
             title: "Nudger - Purpose Reminder",
             message: "",
-            iconUrl: "/images/icon-128.png",
-            imageUrl: "/images/PR.jpg"
+            iconUrl: "assets/images/icon-128.png",
+            imageUrl: "assets/images/PR.jpg"
         });
     } else if(alarm.name === "SC") {
         chrome.notifications.create("SC", 
@@ -27,7 +27,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
             type: "basic",
             title: "Nudger - Status Check",
             message: "Are you wasting your time?",
-            iconUrl: "/images/icon-128.png",
+            iconUrl: "assets/images/icon-128.png",
             buttons: [{
                 title: "☹️ Yes"
             }, {
@@ -43,13 +43,14 @@ chrome.notifications.onButtonClicked.addListener((notifId, btnIdx) => {
     if(notifId === "SC") { 
         if(btnIdx === 0) {
             console.log("Y");
-            chrome.notifications.create({
+            /*chrome.notifications.create({
                 type: "image",
                 title: "Nudger - Purpose Reminder",
                 message: "",
-                iconUrl: "/images/icon-128.png",
-                imageUrl: "/images/SC.jpg"
-            });
+                iconUrl: "assets/images/icon-128.png",
+                imageUrl: "assets/images/SC.jpg"
+            });*/
+            chrome.tabs.create({ url: "popup.html" });
         } else if(btnIdx === 1) {
             console.log("N");
         }
